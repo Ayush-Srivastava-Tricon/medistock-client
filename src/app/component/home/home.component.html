@@ -1,0 +1,212 @@
+<div class="container">
+  <div class="row bg-primary text-light">
+    <div class="col-sm-12 col-md-12 col-lg-12 p-2">
+      <div class="display-1  text-center">Medi-Stock</div>
+      <div class="display-6  text-center">German Homeo Agency</div>
+    </div>
+  </div>
+  <div class="row px-1 my-3 ">
+    <!-- <input type="number" class="form-control" class="col-sm-12 col-md-12 col-lg-12 py-2 rounded border border-primary" (change)="searchMed($event)"> -->
+    <div class="form-group">
+      <input type="tetx" class="form-control" id="exampleFormControlInput1" (keyup)="searchMed($event)"
+        placeholder="Search Medicine Name">
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12 col-md-12 col-lg-12">
+      <table class="table table-bordered table-striped">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Name <button class="btn btn-sm" (click)="sortMedicine()">Sort</button></th>
+            <th scope="col">Q</th>
+            <th scope="col">30</th>
+            <th scope="col">200</th>
+            <th scope="col">1M</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of filteredOptions;let idx= index;">
+            <th scope="row">{{idx+1}}</th>
+            <td class="mediName">{{data.name|uppercase}}</td>
+            <td>
+              <table class="table table-striped table-info">
+                <thead>
+                  <tr>
+                    <th scope="col">SBL</th>
+                    <th scope="col">WSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                  <td class="sbl">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning" [ngClass]="{'btnDisabled':!sbl.dirty}"
+                        [attr.disabled]="!sbl.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.sbl.power_Q" #sbl="ngModel">
+                    </div>
+                  </td>
+
+                  <td class="wsi">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning" [ngClass]="{'btnDisabled':!wsi.dirty}" [attr.disabled]="!wsi.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.wsi.power_Q" #wsi="ngModel">
+                    </div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table-striped table-success">
+                <thead>
+                  <tr>
+                    <th scope="col">SBL</th>
+                    <th scope="col">WSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   <td class="sbl">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning" [ngClass]="{'btnDisabled':!sbl30.dirty}"  [attr.disabled]="!sbl30.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.sbl.power_30" #sbl30="ngModel">
+                    </div>
+                  </td>
+                   <td class="wsi">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning" [ngClass]="{'btnDisabled':!wsi30.dirty}"  [attr.disabled]="!wsi30.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.wsi.power_30" #wsi30="ngModel">
+                    </div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table-striped table-info">
+                <thead>
+                  <tr>
+                    <th scope="col">SBL</th>
+                    <th scope="col">WSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   <td class="sbl">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning" [ngClass]="{'btnDisabled':!sbl200.dirty}"  [attr.disabled]="!sbl200.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.sbl.power_200" #sbl200="ngModel">
+                    </div>
+                  </td>
+                   <td class="wsi">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning"  [ngClass]="{'btnDisabled':!wsi200.dirty}"  [attr.disabled]="!wsi200.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.wsi.power_200" #wsi200="ngModel">
+                    </div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+            <td>
+              <table class="table table-striped table-success">
+                <thead>
+                  <tr>
+                    <th scope="col">SBL</th>
+                    <th scope="col">WSI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                   <td class="sbl">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning"  [ngClass]="{'btnDisabled':!sbl1M.dirty}"  [attr.disabled]="!sbl1M.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.sbl.power_1M" #sbl1M="ngModel">
+                    </div>
+                  </td>
+                   <td class="wsi">
+                    <div class="input-group">
+                      <span class="input-group-text btn btn-warning"  [ngClass]="{'btnDisabled':!wsi1M.dirty}"  [attr.disabled]="!wsi1M.dirty" (click)="updateQuantity(data._id)">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pen"
+                          viewBox="0 0 16 16">
+                          <path
+                            d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001m-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708z">
+                          </path>
+                        </svg>
+                      </span>
+                      <input type="number" class="form-control" [(ngModel)]="data.wsi.power_1M" #wsi1M="ngModel">
+                    </div>
+                  </td>
+                  </tr>
+                </tbody>
+              </table>
+            </td>
+          </tr>
+          <tr *ngIf=" !loader && filteredOptions.length==0">
+            <td colspan="6">No Data Found</td>
+          </tr>
+          <tr *ngIf="loader">
+            <td colspan="6" class="number-center">
+              <div class="spinner-border" role="status">
+            </div>
+          </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+<div class="d-flex justify-content-center my-3">
+  <button class="btn btn-sm btn-danger mx-2" (click)=" displayPage(currentPage-1);" [disabled]="currentPage<=1">Previous</button>
+  <button class="btn btn-sm btn-danger" (click)="displayPage(currentPage+1);" [disabled]="currentPage>=22">Next</button>
+</div>

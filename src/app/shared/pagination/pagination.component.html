@@ -1,0 +1,38 @@
+<nav *ngIf="!isSearchClaimsPage"> 
+    <ul class="pagination justify-content-center">
+        <li #link class="page-item" (click)="prevBtn()">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+        </li>
+    <ng-container *ngFor="let page of paginationPages; let i = index">
+      <li #link *ngIf="i < 5" class="page-link" [ngClass]="{'active':page+1 == 1,'disabled':currentValue-1 == page}" value="page"  (click)="activeLink($event)">{{page + 1}}</li>
+    </ng-container>  
+        <li  #link class="page-item" (click)="nxtBtn()">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+        </li>
+    </ul>
+</nav>
+<ng-container *ngIf="isSearchClaimsPage">
+  <nav >
+    <ul class="pagination justify-content-center">
+      <li #link class="page-item" [attr.disabled]="currentPage === 1" (click)="navigateToPage(currentPage - 1)">
+        <span aria-hidden="true">&laquo;</span>
+        <span class="sr-only">Previous</span>
+      </li>
+      <ng-container *ngFor="let page of getPagesArray()">
+        <ng-container *ngIf="page === '...'">
+          <span class="page-link disabled">{{ page }}</span>
+        </ng-container>
+        <ng-container *ngIf="page !== '...'">
+          <li class="page-link" [ngClass]="{'active':page === currentPage,'disabled':page === currentPage}" value="page"
+          (click)="navigateToPage(page)">{{page}}</li>
+        </ng-container>
+      </ng-container>
+      <li class="page-item" [class.disabled]="currentPage === totalPages" (click)="navigateToPage(currentPage + 1)">
+        <span aria-hidden="true">&raquo;</span>
+        <span class="sr-only">Next</span>
+      </li>
+    </ul>
+  </nav>
+</ng-container>
