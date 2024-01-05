@@ -12,6 +12,7 @@ export class ApplicationService {
     'getMedicine':'getStockDetail',
     'addMedicine':'add-medicine',
     'updateStock':'updateStock',
+    'login':'login',
   }
 
   constructor(private http:HttpClient) { }
@@ -26,5 +27,9 @@ export class ApplicationService {
 
   updateMediStock(params:any,callback:any){
     return this.http.put(this.baseUrl+this.httpUrls['updateStock'],params).subscribe((data:any)=>callback(data));
+  }
+
+  login(params:any,callback:any){
+    return this.http.post(this.baseUrl+this.httpUrls['login'],params).subscribe((data:any)=>callback(data));
   }
 }

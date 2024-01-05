@@ -1,10 +1,11 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { RouterModule, CanActivate } from '@angular/router';
 import { ApplicationService } from 'src/app/services/application.service';
 import { FormsModule } from '@angular/forms';
 import { AlertService } from 'src/app/services/alert.service';
 import { PaginationModule } from 'src/app/shared/pagination/pagination/pagination.module';
+import { AuthGuard } from 'src/app/guard/auth.guard';
 
 @Component({
   selector: 'app-home',
